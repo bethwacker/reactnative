@@ -6,6 +6,7 @@ import { View, FlatList, Text, TouchableOpacity, StyleSheet } from 'react-native
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
 import { Alert } from 'react-native';
+import * as Animatable from 'react-native-animatable'
 
 const FavoritesScreen = ({ navigation }) => {
     const { campsitesArray, isLoading, errMess } = useSelector(
@@ -81,6 +82,7 @@ if (errMess) {
     );
 }
 return (
+    <Animatable.View animation='fadeInRightBig' duration={2000}>
     <FlatList
         data={campsitesArray.filter((campsite) =>
             favorites.includes(campsite.id)
@@ -88,6 +90,7 @@ return (
         renderItem={renderFavoriteItem}
         keyExtractor={(item) => item.id.toString()}
     />
+    </Animatable.View>
 );
 };
 const styles = StyleSheet.create({
